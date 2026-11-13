@@ -42,6 +42,19 @@ Wikimedia rejects requests without a descriptive `User-Agent` (HTTP 403), see th
 
 See [example/main.go](./example/main.go) for a complete program.
 
+## Running tests
+
+```bash
+go test ./...
+```
+
+Unit tests use a local `httptest` server and need no network. To also run the
+test against the live Wiktionary API:
+
+```bash
+WIKTIONARY_LIVE_TEST=1 go test ./client -run Live
+```
+
 ## Generating the client
 
 The client is generated using the OpenAPI schema and the oapi-codegen library. To regenerate the client:
