@@ -6,9 +6,9 @@ import (
 )
 
 type ParsedPageDefinitionTerm struct {
-	PartOfSpeech string       `json:"partOfSpeech"`
-	Language     string       `json:"language"`
-	Definitions  []Definition `json:"definitions"`
+	PartOfSpeech string           `json:"partOfSpeech"`
+	Language     string           `json:"language"`
+	Definitions  []TermDefinition `json:"definitions"`
 }
 
 type TermDefinition struct {

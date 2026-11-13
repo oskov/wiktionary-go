@@ -8,7 +8,9 @@ import (
 )
 
 func main() {
-	client, err := wiktionary.NewClientWithResponses(wiktionary.WiktionaryURL)
+	client, err := wiktionary.NewWiktionaryClient(
+		wiktionary.WithUserAgent("wiktionary-go-example/1.0 (https://github.com/oskov/wiktionary-go)"),
+	)
 	if err != nil {
 		log.Fatalf("Failed to create client: %v", err)
 	}

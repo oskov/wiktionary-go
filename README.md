@@ -10,30 +10,48 @@ Wiktionary-Go is a Go client library for interacting with the Wiktionary API. Th
 
 ## Prerequisites
 
-- Go 1.24.1 or later.
+- Go 1.27 or later.
 
 ## Installation
 
-Clone the repository:
-
 ```bash
-go get github.com/oskov/wiktionary-go
+go get github.com/oskov/wiktionary-go/client
 ```
 
 ## Usage
 
-See ./example/main.go
+```go
+import wiktionary "github.com/oskov/wiktionary-go/client"
+
+client, err := wiktionary.NewWiktionaryClient(
+	wiktionary.WithUserAgent("my-app/1.0 (https://example.com; me@example.com)"),
+)
+if err != nil {
+	log.Fatal(err)
+}
+rsp, err := client.GetPageDefinitionTermWithResponse(ctx, "example", nil)
+if err != nil {
+	log.Fatal(err)
+}
+definitions, err := rsp.GetParsedResponse()
+```
+
+Wikimedia rejects requests without a descriptive `User-Agent` (HTTP 403), see the
+[User-Agent policy](https://meta.wikimedia.org/wiki/User-Agent_policy).
+`NewWiktionaryClient` sets a default one; pass `WithUserAgent` to identify your application.
+
+See [example/main.go](./example/main.go) for a complete program.
 
 ## Generating the client
 
 The client is generated using the OpenAPI schema and the oapi-codegen library. To regenerate the client:
 
 1. Ensure the OpenAPI schema is downloaded to ./api/wiktionary/openapi.json. You can use the provided script:
-```bash 
+```bash
 ./download-openapi.sh
 ```
 2. Run the go generate command to generate the client:
 
-```bash 
+```bash
 go generate ./...
 ```

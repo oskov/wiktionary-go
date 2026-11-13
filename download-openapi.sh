@@ -1,4 +1,3 @@
-#/bin/bash
 
 #!/bin/bash
 
@@ -10,7 +9,7 @@ OUTPUT_FILE="./api/wiktionary/openapi.json"
 mkdir -p "$(dirname "$OUTPUT_FILE")"
 
 # Download the file
-curl -o "$OUTPUT_FILE" "$URL"
+curl -fsSL -A "wiktionary-go (https://github.com/oskov/wiktionary-go)" -o "$OUTPUT_FILE" "$URL"
 
 # Check if the download was successful
 if [ $? -eq 0 ]; then
